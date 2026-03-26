@@ -2,12 +2,12 @@ pipeline {
     agent any
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-id') // stored in Jenkins
-        DOCKER_IMAGE = "arunasri0096/task6:latest"
+        DOCKER_IMAGE = "srividyatikka/task6:latest"
     }
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Arunasri-0096/task6.git'
+                git branch: 'main', url: 'https://github.com/SrividyaTikka/task6.git'
             }
         }
         stage('Build Docker Image') {
