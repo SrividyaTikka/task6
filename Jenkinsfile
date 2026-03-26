@@ -23,9 +23,18 @@ pipeline {
         }
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f k8s/deployment.yml'
-                sh 'kubectl apply -f k8s/service.yml'
-                sh 'kubectl apply -f k8s/ingress.yml'
+                sh '''
+                # Configure EKS access
+                aws eks --region ap-south-1 update-kubeconfig --name task6
+
+                # Verify connection (optional but recommended)
+                kubectl get nodes
+
+                # Deploy resources
+                kubectl apply -f k8s/deployment.yml
+                kubectl apply -f k8s/service.yml
+                kubectl apply -f k8s/ingress.yml
+                '''
             }
         }
     }
